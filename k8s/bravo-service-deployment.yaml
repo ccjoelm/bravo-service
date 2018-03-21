@@ -1,0 +1,30 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: bravo-service
+  labels:
+    app: bravo-service
+    version: 0.0.1-SNAPSHOT
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bravo-service
+      version: 0.0.1-SNAPSHOT
+  template:
+    metadata:
+      labels:
+        app: bravo-service
+        version: 0.0.1-SNAPSHOT
+    spec:
+      containers:
+      - name: bravo-service
+        image: jmorris/bravo-service:0.0.1-SNAPSHOT
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: registry
+          protocol: TCP
+        env:
+        - name:  'KUBERNETES_TRUST_CERTIFICATES'
+          value: 'true'

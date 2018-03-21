@@ -1,0 +1,41 @@
+#
+# Common yaml file - applies to all applications
+# Properties are overridden by app-specific properties, environment variables, etc
+# Commented out properties must be specified by each application
+#
+
+#embedded tomcat
+server:
+  port: 8080
+  context-path: /
+
+#common logging
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss:SSS} - %-5level - Correlation-Id = %X{correlationId} - AppName = %X{appName} - Server-IP = %X{server} - RequestorApp = %X{requestorApp} - RequestorIp = %X{requestorIp} - UserId = %X{userId} - Total-Time = %X{totalTime} - %msg - %logger{36}%n'
+
+#datasource
+spring:
+  application:
+    name: bravo-service
+  datasource:
+    type: org.apache.tomcat.dbcp.dbcp2.BasicDataSource
+
+common:
+#  application-version: v1
+  rest:
+    paths:
+      build-info: /buildInfo
+  health:
+    database-check-sql: 'SELECT 1 FROM DUAL'
+
+management:
+  security:
+    enabled: false
+  context-path: /actuator
+
+bravo:
+  service:
+    test: joel
